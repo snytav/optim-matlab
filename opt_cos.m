@@ -1,6 +1,6 @@
 rng default % for reproducibility
 tdata = 0:0.1:10;
-ydata = 40*exp(-0.5*tdata) + randn(size(tdata));
+ydata = 40*cos(-0.5*tdata) + randn(size(tdata));
 
 type sseval
 
@@ -18,7 +18,7 @@ bestx = fminsearch(fun,x0);
 
 A = bestx(1);
 lambda = bestx(2);
-yfit = A*exp(-lambda*tdata);
+yfit = A*cos(-lambda*tdata);
 plot(tdata,ydata,'*');
 hold on
 plot(tdata,yfit,'r');
