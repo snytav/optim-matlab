@@ -1,0 +1,1 @@
+[curvepar, fitpar]=fit(rand(100,1), rand(100,1),'poly1')
