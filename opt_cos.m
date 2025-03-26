@@ -7,18 +7,20 @@ type sseval
 function sse = sseval(x,tdata,ydata)
 A = x(1);
 lambda = x(2);
-sse = sum((ydata - A*cos(-lambda*tdata)).^2);
+b = x(3);
+sse = sum((ydata - A*cos(-lambda*tdata+b)).^2);
 end
 
 fun = @(x)sseval(x,tdata,ydata);
 
-x0 = rand(2,1);
+x0 = rand(3,1);
 bestx = fminsearch(fun,x0);
 
 
 A = bestx(1);
 lambda = bestx(2);
-yfit = A*cos(-lambda*tdata);
+b = bestx(3);
+yfit = A*cos(-lambda*tdata +b);
 plot(tdata,ydata,'*');
 hold on
 plot(tdata,yfit,'r');
