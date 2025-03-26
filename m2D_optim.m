@@ -14,7 +14,8 @@ x0 = [-1.2,1];
 
 %result gets worse but unevenly if you reduce FiniteDifferenceStepSize
 % opt = optimset('fminsearch', 'StepTolerance', 1e-14, 'Display', 'iter', 'FiniteDifferenceStepSize', 1e-9);
-options = optimset('PlotFcns',@optimplotfval);
+options = optimset('Display','iter','PlotFcns',@optimplotfval,'MaxIter',10000);
 
+figure;
 x = fminsearch(fun,x0,options);
 qq = 0;
