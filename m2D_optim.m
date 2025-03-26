@@ -9,13 +9,13 @@ surf(X,T,ydata);
 
 
 
-fun = @(x)norm(ydata - x(1)*cos(X*x(2)) );
-x0 = [-1.2,1];
+fun = @(x)  sum(sum( ydata - x(1)*cos(X*x(2))  ))^2;
+x0 = [0,0];
 
 %result gets worse but unevenly if you reduce FiniteDifferenceStepSize
 % opt = optimset('fminsearch', 'StepTolerance', 1e-14, 'Display', 'iter', 'FiniteDifferenceStepSize', 1e-9);
-options = optimset('Display','iter','PlotFcns',@optimplotfval,'MaxIter',10000);
+options = optimset('Display','iter','PlotFcns',@optimplotfval,'MaxIter', 3000, 'MaxFunEvals', 10000,'TolFun',1e-14,'TolX',1e-14);
 
 figure;
-x = fminsearch(fun,x0,options);
+x = fminsearch(fun,x0,options)
 qq = 0;
