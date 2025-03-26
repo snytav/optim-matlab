@@ -1,7 +1,10 @@
 rng default % for reproducibility
-tdata = 0:0.1:10;
-xdata = 0:0.1:10;
-ydata = 40*cos(-0.5*(tdata+xdata)) + randn(size(tdata+xdata));
+tdata = 0:1:10;
+xdata = 0:1:10;
+[X,T] = meshgrid(xdata,tdata)
+ydata = 40*cos(-0.5*(X)*cos(b*T));% + randn(size(tdata,2),size(xdata,2));
+figure;
+surf(X,T,ydata);
 
 type sseval
 
@@ -9,7 +12,7 @@ function sse = sseval(x,tdata,xdata,ydata)
 A = x(1);
 lambda = x(2);
 b = x(3);
-sse = sum((ydata - A*cos(-lambda*(tdata+xdata)+b)).^2);
+sse = sum((ydata - A*cos(-lambda*cos(xdata)*cos(b*tdata))).^2);
 end
 
 fun = @(x)sseval(x,tdata,xdata,ydata);
